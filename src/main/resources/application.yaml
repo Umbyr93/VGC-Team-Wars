@@ -1,0 +1,47 @@
+spring:
+  datasource:
+    url: ${DATASOURCE_URL:jdbc:postgresql://localhost:5432/postgres}
+    username: ${DATASOURCE_USR:urusso}
+    password: ${DATASOURCE_PWD:urussopwd}
+    driver-class-name: ${DATASOURCE_DRIVER:org.postgresql.Driver}
+    hikari:
+      maximum-pool-size: 5
+      schema: vgc
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/master.yml
+    contexts: dev
+    drop-first: false
+    default-schema: vgc
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui
+    operationsSorter: method
+    tagsSorter: alpha
+
+swagger:
+  version: 1.0
+  title: VGC Team Wars
+  description: Swagger for the VGC Team Wars application
+
+management:
+  endpoint:
+    health:
+      show-details: always
+
+security:
+  jwt:
+    secret-key: ${JWT_SECRET_KEY:a3f4c91d7b6e2c5a8d9f0b1e4c7a6d3f9e2b8c1d5a0f6e4b9c7d2a1e8f3b6c5}
+    expiration-time: ${JWT_EXPIRATION_TIME:3600000}
+
+cache:
+  jwt-ttl: 55 #minutes

@@ -1,0 +1,121 @@
+```gitignore
+############################
+# Maven
+############################
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+
+############################
+# IntelliJ IDEA
+############################
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+
+############################
+# Eclipse
+############################
+.project
+.classpath
+.settings/
+.apt_generated/
+.factorypath
+
+############################
+# VS Code
+############################
+.vscode/
+
+############################
+# NetBeans
+############################
+nbproject/private/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+############################
+# Gradle
+############################
+.gradle/
+build/
+
+############################
+# Java
+############################
+*.class
+*.log
+*.ctxt
+hs_err_pid*
+replay_pid*
+
+############################
+# OS Files
+############################
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+############################
+# Linux
+############################
+*~
+
+############################
+# Environment
+############################
+.env
+.env.*
+!.env.example
+
+############################
+# Spring Boot
+############################
+application-local.yml
+application-local.yaml
+application-local.properties
+
+application-dev.yml
+application-dev.yaml
+application-dev.properties
+
+############################
+# Logs
+############################
+logs/
+*.log
+
+############################
+# Temporary files
+############################
+tmp/
+temp/
+*.tmp
+*.swp
+*.swo
+
+############################
+# Archives
+############################
+*.zip
+*.tar
+*.tar.gz
+*.rar
+*.7z
+
+############################
+# Generated files
+############################
+generated/
+generated-sources/
+```
