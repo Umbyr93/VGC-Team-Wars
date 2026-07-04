@@ -19,15 +19,17 @@ public class CacheManagerConfig {
 
     @Bean
     public CacheManager cacheManager() {
-        CaffeineCache jwtCache = new CaffeineCache(CacheName.JWT_CACHE,
+        var jwtCache = new CaffeineCache(CacheName.JWT_CACHE,
                 Caffeine.newBuilder()
-                        .expireAfterWrite(cacheConfig.getJwtTtl(), TimeUnit.MINUTES)
-                        .maximumSize(2)
-                        .build()
-        );
+                        .expireAfterWrite(cacheConfig.getJwtTtl(), TimeUnit.HOURS)
+                        .build());
+        var refreshJwtCache = new CaffeineCache(CacheName.REFRESH_JWT_CACHE,
+                Caffeine.newBuilder()
+                        .expireAfterWrite(cacheConfig.getRefreshJwtTtl(), TimeUnit.DAYS)
+                        .build());
 
         SimpleCacheManager manager = new SimpleCacheManager();
-        manager.setCaches(List.of(jwtCache));
+        manager.setCaches(List.of(jwtCache, refreshJwtCache));
 
         return manager;
     }

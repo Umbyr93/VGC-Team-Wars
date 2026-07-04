@@ -13,6 +13,10 @@ public class UserEntity {
 
     private String username;
     private String password;
-    private String email;
-    private String team;
+    private String discordNickname;
+    private String twitterNickname;
+    private String fullName;
+    private Long teamId;
+    private boolean admin;
+    private boolean teamAdmin;
 }

@@ -6,7 +6,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.urusso.vgcteamwars.common.constants.ErrorEnum;
 import org.urusso.vgcteamwars.common.exception.AuthorizationException;
-import org.urusso.vgcteamwars.common.provider.JwtProvider;
+import org.urusso.vgcteamwars.domain.jwt.provider.JwtProvider;
 import org.urusso.vgcteamwars.domain.user.dto.CreateUserRequest;
 import org.urusso.vgcteamwars.domain.user.dto.CreateUserResponse;
 import org.urusso.vgcteamwars.domain.user.dto.LoginUserRequest;
@@ -27,6 +27,8 @@ public class UserService {
     private final JwtProvider jwtProvider;
 
     public CreateUserResponse createUser(CreateUserRequest request) {
+        //TODO non si può creare uno user già presente
+
         UserEntity createEntity = userMapper.toEntityFromCreateRequest(request);
         createEntity.setPassword(ENCODER.encode(request.password()));
 
@@ -43,6 +45,7 @@ public class UserService {
 
         LoginUserResponse response = userMapper.toResponse(user);
         response.setJwtToken(jwtProvider.generateToken(response.getUsername()));
+        response.setRefreshToken(jwtProvider.generateRefreshToken(response.getUsername()));
         return response;
     }
 }

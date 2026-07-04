@@ -1,0 +1,70 @@
+databaseChangeLog:
+  - changeSet:
+      id: 003-base
+      author: urusso
+      changes:
+        - createTable:
+            tableName: war
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: team1_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: team2_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: team1_wins
+                  type: int
+                  defaultValueNumeric: 0
+                  constraints:
+                    nullable: false
+              - column:
+                  name: team2_wins
+                  type: int
+                  defaultValueNumeric: 0
+                  constraints:
+                    nullable: false
+              - column:
+                  name: date_start
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: date_end
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: accepted
+                  type: boolean
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+              - column:
+                  name: date_creation
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseTableName: war
+            baseColumnNames: team1_id
+            referencedTableName: team
+            referencedColumnNames: id
+            constraintName: fk_war_team1_id
+        - addForeignKeyConstraint:
+            baseTableName: war
+            baseColumnNames: team2_id
+            referencedTableName: team
+            referencedColumnNames: id
+            constraintName: fk_war_team2_id

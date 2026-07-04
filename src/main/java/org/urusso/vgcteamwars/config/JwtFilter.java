@@ -12,7 +12,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.servlet.HandlerExceptionResolver;
-import org.urusso.vgcteamwars.common.provider.JwtProvider;
+import org.urusso.vgcteamwars.domain.jwt.provider.JwtProvider;
 
 import java.io.IOException;
 import java.util.Collections;

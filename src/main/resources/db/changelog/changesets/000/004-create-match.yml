@@ -1,0 +1,117 @@
+databaseChangeLog:
+  - changeSet:
+      id: 004-base
+      author: urusso
+      changes:
+        - createTable:
+            tableName: match
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: war_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: player1_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: player1_ots_url
+                  type: varchar(200)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: player1_ots_update
+                  type: timestamp
+                  constraints:
+                    nullable: true
+              - column:
+                  name: player1_cts_url
+                  type: varchar(200)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: player1_cts_update
+                  type: timestamp
+                  constraints:
+                    nullable: true
+              - column:
+                  name: player2_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: player2_ots_url
+                  type: varchar(200)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: player2_ots_update
+                  type: timestamp
+                  constraints:
+                    nullable: true
+              - column:
+                  name: player2_cts_url
+                  type: varchar(200)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: player2_cts_update
+                  type: timestamp
+                  constraints:
+                    nullable: true
+              - column:
+                  name: player1_game1_result
+                  type: varchar(1)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: player2_game1_result
+                  type: varchar(1)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: player1_game2_result
+                  type: varchar(1)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: player2_game2_result
+                  type: varchar(1)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: player1_game3_result
+                  type: varchar(1)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: player2_game3_result
+                  type: varchar(1)
+                  constraints:
+                    nullable: true
+        - addForeignKeyConstraint:
+            baseTableName: match
+            baseColumnNames: war_id
+            referencedTableName: war
+            referencedColumnNames: id
+            constraintName: fk_match_war_id
+        - addForeignKeyConstraint:
+            baseTableName: match
+            baseColumnNames: player1_id
+            referencedTableName: users
+            referencedColumnNames: id
+            constraintName: fk_player1_id
+        - addForeignKeyConstraint:
+            baseTableName: match
+            baseColumnNames: player2_id
+            referencedTableName: users
+            referencedColumnNames: id
+            constraintName: fk_player2_id

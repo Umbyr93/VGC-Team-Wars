@@ -1,0 +1,56 @@
+databaseChangeLog:
+  - changeSet:
+      id: 002-base
+      author: urusso
+      changes:
+        - createTable:
+            tableName: team
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: logo_url
+                  type: varchar(200)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: website_url
+                  type: varchar(200)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: instagram_url
+                  type: varchar(200)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: twitter_url
+                  type: varchar(200)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: creator_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: date_creation
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+              - addForeignKeyConstraint:
+                  baseTableName: team
+                  baseColumnNames: creator_id
+                  referencedTableName: users
+                  referencedColumnNames: id
+                  constraintName: fk_team_creator_id

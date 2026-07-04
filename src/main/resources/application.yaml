@@ -9,7 +9,7 @@ spring:
       schema: vgc
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: validate
     properties:
       hibernate:
         jdbc:
@@ -40,8 +40,12 @@ management:
 
 security:
   jwt:
-    secret-key: ${JWT_SECRET_KEY:a3f4c91d7b6e2c5a8d9f0b1e4c7a6d3f9e2b8c1d5a0f6e4b9c7d2a1e8f3b6c5}
-    expiration-time: ${JWT_EXPIRATION_TIME:3600000}
+    secret-key: ${JWT_SECRET_KEY:359191e2639870f59be5c9dfb67ba23209c4c1ea0ad5140cd8bfd9fba6448184}
+    expiration-time: ${JWT_EXPIRATION_TIME:12h}
+  refresh:
+    secret-key: ${REFRESH_JWT_SECRET_KEY:cc02dc955e61d30ea8e328f72a7a0c2d7d96d5f7a27fa83d0bf9f3da74c144d8}
+    expiration-time: ${REFRESH_JWT_EXPIRATION_TIME:30d}
 
 cache:
-  jwt-ttl: 55 #minutes
+  jwt-ttl: 12 #hours
+  refresh-jwt-ttl: 30 #days

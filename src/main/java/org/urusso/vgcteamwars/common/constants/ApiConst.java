@@ -10,5 +10,8 @@ public final class ApiConst {
     private static final String SEP = "/";
     private static final String API_V1 = API + SEP + V1;
 
+    public static final String AUTH_API = API_V1 + SEP + "auth";
     public static final String USER_API = API_V1 + SEP + "users";
+    public static final String TEAM_API = API_V1 + SEP + "teams";
+    public static final String WAR_API = API_V1 + SEP + "wars";
 }

@@ -9,4 +9,5 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties(prefix = "cache")
 public class CacheConfiguration {
     private long jwtTtl;
+    private long refreshJwtTtl;
 }

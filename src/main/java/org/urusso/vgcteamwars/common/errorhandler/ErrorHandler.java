@@ -8,20 +8,23 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.urusso.vgcteamwars.common.dto.ErrorDto;
 import org.urusso.vgcteamwars.common.exception.BaseException;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Slf4j
 @RestControllerAdvice
 public class ErrorHandler {
     private static final String GENERIC_ERROR = "GENERIC_ERROR";
+    private static final String VALIDATION_ERROR = "VALIDATION_ERROR";
     private static final String EXCEPTION_OCCURRED = "Exception occured";
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<?> methodArgumentNotValidException(MethodArgumentNotValidException ex) {
         logError(ex);
 
-        Map<String, String> errors = new HashMap<>();
+        Map<String, String> errors = new LinkedHashMap<>();
+        errors.put("code", VALIDATION_ERROR);
+
         ex.getBindingResult().getFieldErrors().forEach(error ->
                 errors.put(error.getField(), error.getDefaultMessage())
         );

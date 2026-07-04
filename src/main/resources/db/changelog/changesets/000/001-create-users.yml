@@ -19,16 +19,38 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: password
-                  type: varchar(150)
+                  type: varchar(110)
                   constraints:
                     nullable: false
               - column:
-                  name: email
+                  name: discord_nickname
                   type: varchar(50)
                   constraints:
                     nullable: false
               - column:
-                  name: team
+                  name: twitter_nickname
                   type: varchar(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: full_name
+                  type: varchar(100)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: team_id
+                  type: bigint
+                  constraints:
+                    nullable: true
+              - column:
+                  name: admin
+                  type: boolean
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+              - column:
+                  name: team_admin
+                  type: boolean
+                  defaultValueBoolean: false
                   constraints:
                     nullable: false

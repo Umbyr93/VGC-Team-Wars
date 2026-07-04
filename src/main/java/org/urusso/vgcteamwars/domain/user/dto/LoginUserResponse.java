@@ -12,6 +12,12 @@ import lombok.NoArgsConstructor;
 public class LoginUserResponse {
     private Long userId;
     private String username;
-    private String email;
+    private String discordNickname;
+    private String twitterNickname;
+    private String fullName;
+    private String teamId;
+    private boolean admin;
+    private boolean teamAdmin;
     private String jwtToken;
+    private String refreshToken;
 }

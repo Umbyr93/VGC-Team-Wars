@@ -26,7 +26,7 @@ import org.urusso.vgcteamwars.domain.user.service.UserService;
 public class UserController {
     private final UserService userService;
 
-    @Operation(summary = "Create user", description = "API to create the user")
+    @Operation(summary = "Create user", description = "API to create a user")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "User successfully created")
     })
