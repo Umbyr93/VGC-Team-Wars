@@ -17,6 +17,6 @@ public class UserEntity {
     private String twitterNickname;
     private String fullName;
     private Long teamId;
-    private boolean admin;
+    private boolean platformAdmin;
     private boolean teamAdmin;
 }

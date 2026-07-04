@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -25,8 +26,7 @@ public class SecurityConfig {
             "/v3/api-docs",
             "/v3/api-docs/**",
             "/v3/api-docs.yaml",
-            "/actuator/**",
-            String.format("/%s/**", ApiConst.USER_API) //USER API
+            "/actuator/**"
     };
 
     @Bean
@@ -37,6 +37,8 @@ public class SecurityConfig {
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(WHITELIST_URLS).permitAll()
+                        .requestMatchers(HttpMethod.POST, String.format("/%s", ApiConst.USER_API)).permitAll()
+                        .requestMatchers(HttpMethod.POST, String.format("/%s/login", ApiConst.USER_API)).permitAll()
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling(ex -> ex

@@ -10,7 +10,9 @@ import org.urusso.vgcteamwars.domain.team.dto.FindTeamResponse;
 import org.urusso.vgcteamwars.domain.team.dto.TeamResponse;
 import org.urusso.vgcteamwars.domain.team.mapper.TeamMapper;
 import org.urusso.vgcteamwars.persistence.model.TeamEntity;
+import org.urusso.vgcteamwars.persistence.model.UserEntity;
 import org.urusso.vgcteamwars.persistence.repository.TeamRepository;
+import org.urusso.vgcteamwars.persistence.repository.UserRepository;
 
 import java.util.List;
 import java.util.Objects;
@@ -21,12 +23,21 @@ import java.util.Optional;
 public class TeamService {
     private final TeamRepository teamRepository;
     private final TeamMapper teamMapper;
+    private final UserRepository userRepository;
 
     public CreateTeamResponse createTeam(CreateTeamRequest request) {
-        //todo controllo nome team già esistente
+        //TODO if you already are in a team, you can't create another
+
+        Optional<TeamEntity> teamOpt = teamRepository.findByName(request.name());
+        if(teamOpt.isPresent()) throw new BusinessException(ErrorEnum.TEAM_ALREDY_PRESENT);
 
         TeamEntity create = teamMapper.toEntityFromCreateRequest(request);
         TeamEntity saved = teamRepository.save(create);
+
+        Optional<UserEntity> userOpt = userRepository.findById(request.creatorId());
+        UserEntity user = userOpt.orElseThrow(() -> new BusinessException(ErrorEnum.USER_NOT_FOUND));
+        user.setTeamId(saved.getId());
+        userRepository.save(user);
 
         return new CreateTeamResponse(saved.getId());
     }
@@ -45,5 +56,10 @@ public class TeamService {
                 .filter(Objects::nonNull)
                 .map(e -> new FindTeamResponse(e.getId(), e.getName()))
                 .toList();
+    }
+
+    public TeamEntity findById(Long teamId) {
+        Optional<TeamEntity> teamOpt = teamRepository.findById(teamId);
+        return teamOpt.orElseThrow(() -> new BusinessException(ErrorEnum.TEAM_NOT_FOUND));
     }
 }

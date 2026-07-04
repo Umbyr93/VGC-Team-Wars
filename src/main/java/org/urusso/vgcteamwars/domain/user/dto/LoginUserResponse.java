@@ -16,7 +16,7 @@ public class LoginUserResponse {
     private String twitterNickname;
     private String fullName;
     private String teamId;
-    private boolean admin;
+    private boolean platformAdmin;
     private boolean teamAdmin;
     private String jwtToken;
     private String refreshToken;

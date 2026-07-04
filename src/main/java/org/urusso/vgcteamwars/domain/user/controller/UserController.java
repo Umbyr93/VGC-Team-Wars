@@ -7,16 +7,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.urusso.vgcteamwars.common.constants.ApiConst;
 import org.urusso.vgcteamwars.common.constants.SwaggerTag;
-import org.urusso.vgcteamwars.domain.user.dto.CreateUserRequest;
-import org.urusso.vgcteamwars.domain.user.dto.CreateUserResponse;
-import org.urusso.vgcteamwars.domain.user.dto.LoginUserRequest;
-import org.urusso.vgcteamwars.domain.user.dto.LoginUserResponse;
+import org.urusso.vgcteamwars.domain.user.dto.*;
 import org.urusso.vgcteamwars.domain.user.service.UserService;
 
 @RestController
@@ -44,5 +38,15 @@ public class UserController {
     public ResponseEntity<LoginUserResponse> login(@Valid @RequestBody LoginUserRequest request) {
         LoginUserResponse response = userService.login(request);
         return ResponseEntity.ok(response);
+    }
+
+    @Operation(summary = "Add user to team", description = "API to add a user to the team")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "User added")
+    })
+    @PatchMapping("register-team")
+    public ResponseEntity<Void> addUserToTeam(@Valid @RequestBody UserTeamRequest request) {
+        userService.addUserToTeam(request);
+        return ResponseEntity.ok().build();
     }
 }
